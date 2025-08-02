@@ -49,7 +49,7 @@ export interface ServiceOptions {
   /**
    * The TTL (time to live) in seconds for the all records.
    * @remarks The same TTL is set to all records (PTR, SRV, TXT, A, AAAA) for simplicity and compatibility.
-   * @default 28800
+   * @default 4500
    */
   ttl?: number
 
@@ -130,7 +130,7 @@ export class Service extends EventEmitter<ServiceEventMap> implements Required<S
 
     this.txt = options.txt ?? {}
 
-    this.ttl = options.ttl ?? 28800
+    this.ttl = options.ttl ?? 4500
 
     this.probe = options.probe ?? true
     this.probeAutoResolve = options.probeAutoResolve ?? true
