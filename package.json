@@ -1,6 +1,6 @@
 {
   "name": "@collight/dns-sd",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A DNS Service Discovery implementation in modern TypeScript",
   "type": "module",
   "main": "./dist/cjs/index.cjs",
