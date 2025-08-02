@@ -83,28 +83,28 @@ describe('service', () => {
           {
             type: 'PTR',
             name: '_http._tcp.local',
-            ttl: 28800,
+            ttl: 4500,
             data: s.fqdn,
           },
           {
             type: 'SRV',
             name: s.fqdn,
-            ttl: 28800,
+            ttl: 4500,
             data: { port: 3000, target: os.hostname() },
           },
           {
             type: 'TXT',
             name: s.fqdn,
-            ttl: 28800,
+            ttl: 4500,
             data: [],
           },
           {
             type: 'PTR',
             name: '_services._dns-sd._udp.local',
-            ttl: 28800,
+            ttl: 4500,
             data: '_http._tcp.local',
           },
-        ].concat(getAddressesRecords(s.host, 28800)),
+        ].concat(getAddressesRecords(s.host, 4500)),
       )
     })
 
