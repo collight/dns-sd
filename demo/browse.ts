@@ -6,6 +6,8 @@ import { program } from 'commander'
 import { BrowserFilter, DNSSD } from '../src'
 
 interface CLIOptions {
+  all: boolean
+  verbose: boolean
   protocol: string
   type: string
   subtypes?: string
@@ -28,6 +30,8 @@ async function main() {
   program
     .name(chalk.blue('dnssd-browser'))
     .description('🔍 Browse and watch DNS-SD services')
+    .option('-a, --all', 'Search with wildcard (_services._dns-sd._udp.local)')
+    .option('-v, --verbose', 'Print verbose data')
     .option('-p, --protocol <protocol>', 'Filter by protocol (tcp or udp)', 'tcp')
     .option('-t, --type <type>', 'Filter by service type', 'http')
     .option('-s, --subtypes <items>', 'Comma-separated list of subtypes')
@@ -56,13 +60,15 @@ async function main() {
     exit(1)
   }
 
-  const filter: BrowserFilter = {
-    protocol: opts.protocol,
-    type: opts.type,
-    subtypes: opts.subtypes != undefined ? opts.subtypes.split(',').filter(Boolean) : [],
-    name: opts.name,
-    txt: opts.txt,
-  }
+  const filter: BrowserFilter | undefined = opts.all
+    ? undefined
+    : {
+        protocol: opts.protocol,
+        type: opts.type,
+        subtypes: opts.subtypes != undefined ? opts.subtypes.split(',').filter(Boolean) : [],
+        name: opts.name,
+        txt: opts.txt,
+      }
 
   // MARK: start browser
   console.log(chalk.cyan('🔎 Starting browser with filter:\n'))
@@ -81,31 +87,34 @@ async function main() {
     console.log(chalk.green(`⬆️  Service UP: ${chalk.bold(service.fqdn)}`))
     const { name, type, protocol, subtypes, host, port, addresses, referer, txt } = service
 
-    // Pretty print main details
-    console.log(
-      util
-        .inspect(
-          { name, type, protocol, subtypes, host, port, addresses, referer },
-          {
-            colors: true,
-            depth: null,
-            compact: false,
-          },
-        )
-        .split('\n')
-        .map(line => '  ' + line)
-        .join('\n'),
-    )
-    // Pretty print TXT records
-    console.log(chalk.gray('  📝 TXT Records:'))
-    console.log(
-      util
-        .inspect(txt, { colors: true, depth: null, compact: false })
-        .split('\n')
-        .map(line => '    ' + line)
-        .join('\n'),
-    )
-    console.log()
+    if (opts.verbose) {
+      // Pretty print main details
+      console.log(
+        util
+          .inspect(
+            { name, type, protocol, subtypes, host, port, addresses, referer },
+            {
+              colors: true,
+              depth: null,
+              compact: false,
+            },
+          )
+          .split('\n')
+          .map(line => '  ' + line)
+          .join('\n'),
+      )
+
+      // Pretty print TXT records
+      console.log(chalk.gray('  📝 TXT Records:'))
+      console.log(
+        util
+          .inspect(txt, { colors: true, depth: null, compact: false })
+          .split('\n')
+          .map(line => '    ' + line)
+          .join('\n'),
+      )
+      console.log()
+    }
   })
 
   browser.on('down', service => {
@@ -114,8 +123,6 @@ async function main() {
 
   browser.on('update', service => {
     console.log(chalk.magenta(`🔄 Updated for ${chalk.bold(service.name)} - ${service.fqdn}`))
-    console.log(chalk.gray(`  New TXT:`), util.inspect(service.txt, { colors: true, depth: null, compact: false }))
-    console.log()
   })
 
   browser.start()

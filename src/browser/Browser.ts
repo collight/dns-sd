@@ -2,7 +2,7 @@ import { RemoteInfo } from 'dgram'
 import { EventEmitter } from 'events'
 import { MulticastDNS, ResponsePacket } from 'multicast-dns'
 
-import { nameEquals, ServiceType } from '../utils'
+import { debug, nameEquals, ServiceType } from '../utils'
 import { DiscoveredService } from './DiscoveredService'
 
 // MARK: BrowserFilter
@@ -43,7 +43,7 @@ export interface BrowserOptions {
 interface BrowserEventMap {
   up: [service: DiscoveredService]
   down: [service: DiscoveredService]
-  update: [service: DiscoveredService]
+  update: [curr: DiscoveredService, prev: DiscoveredService]
 }
 
 // MARK: Browser
@@ -53,7 +53,7 @@ interface BrowserEventMap {
  * Emits:
  * - `up`: when a new service appears.
  * - `down`: when a previously seen service sends a "goodbye" (TTL = 0).
- * - `update`: when a service's TXT record content changes.
+ * - `update`: when an existing service has received new records
  */
 export class Browser extends EventEmitter<BrowserEventMap> {
   static TLD = '.local'
@@ -97,6 +97,8 @@ export class Browser extends EventEmitter<BrowserEventMap> {
     if (this.onresponse) return
 
     this.onresponse = (packet: ResponsePacket, rinfo: RemoteInfo) => {
+      debug('mdns on response packet:', packet)
+
       // Handle goodbye records (TTL = 0) to remove offline services
       // See https://tools.ietf.org/html/rfc6762#section-8.4
       for (const answer of [...packet.answers, ...packet.additionals]) {
@@ -107,7 +109,17 @@ export class Browser extends EventEmitter<BrowserEventMap> {
 
       // Discover new services from valid responses
       const services = DiscoveredService.fromResponse(packet, rinfo)
-      if (services.length === 0) return
+      if (services.length === 0) {
+        if (!this.filter) {
+          // Initial wildcard query will only give PTR, need to query each one manually
+          for (const answer of packet.answers) {
+            if (answer.type !== 'PTR' || answer.name !== Browser.WILDCARD) continue
+            debug('mdns wildcard query with:', answer.data)
+            this.mdns.query(answer.data, 'PTR')
+          }
+        }
+        return
+      }
 
       for (const service of services) {
         if (this.services.some(s => nameEquals(s.fqdn, service.fqdn))) {
@@ -148,6 +160,7 @@ export class Browser extends EventEmitter<BrowserEventMap> {
    */
   update() {
     // Actively query for service PTR records
+    debug('mdns query with:', this.queryNames)
     for (const queryName of this.queryNames) {
       this.mdns.query(queryName, 'PTR')
     }
@@ -230,12 +243,13 @@ export class Browser extends EventEmitter<BrowserEventMap> {
       if (nameEquals(s.fqdn, service.fqdn)) {
         clearTimeout(s.ttlTimer)
         this.services[i] = service
+
+        this.setupTTLTimer(service)
+
+        this.emit('update', service, s)
+        break
       }
     }
-
-    this.setupTTLTimer(service)
-
-    this.emit('update', service)
   }
 
   private removeService(fqdn: string) {

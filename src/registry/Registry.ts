@@ -1,7 +1,7 @@
 import { RecordType } from 'dns-packet'
 import { ResponsePacket } from 'multicast-dns'
 
-import { MDNSServer, nameEquals } from '../utils'
+import { debug, MDNSServer, nameEquals } from '../utils'
 import { Service, ServiceOptions } from './Service'
 
 // MARK: Registry
@@ -209,10 +209,11 @@ export class Registry {
 
     this.server.register(records)
 
+    let delay = 1000
     const broadcast = () => {
       if (!service.started || service.destroyed) return
 
-      let delay = 1000
+      debug('mdns broadcast:', records)
       this.server.mdns.respond(records, error => {
         if (error) {
           console.warn('Error during announcement:', error)
@@ -256,6 +257,7 @@ export class Registry {
     this.server.unregister(records)
 
     return new Promise<void>((resolve, reject) => {
+      debug('mdns goodbye:', records)
       this.server.mdns.respond(records, error => {
         for (const service of publishedServices) {
           service.published = false

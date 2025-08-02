@@ -7,6 +7,7 @@ import { program } from 'commander'
 import { DNSSD, ServiceOptions } from '../src'
 
 type CLIOptions = {
+  verbose: boolean
   protocol: string
   type: string
   subtypes: string
@@ -31,6 +32,7 @@ async function main() {
     .name(chalk.blueBright('browser'))
     .description('📡 A DNSSD service publisher')
     .version('1.0.0')
+    .option('-v, --verbose', 'Print verbose data')
     .option('-p, --protocol <type>', 'Service protocol (tcp or udp)', 'tcp')
     .option('-t, --type <type>', 'Service type', 'http')
     .option('-s, --subtypes <items>', 'Comma-separated list of subtypes', '')
@@ -108,16 +110,18 @@ async function main() {
   console.log()
 
   // Pretty print the service object
-  console.log(chalk.gray('📝 Service details:\n'))
+  if (opts.verbose) {
+    console.log(chalk.gray('📝 Service details:\n'))
 
-  const inspected = util.inspect(service, { colors: true, depth: null, compact: false })
-  const indented = inspected
-    .split('\n')
-    .map(line => '  ' + line)
-    .join('\n')
+    const inspected = util.inspect(service, { colors: true, depth: null, compact: false })
+    const indented = inspected
+      .split('\n')
+      .map(line => '  ' + line)
+      .join('\n')
 
-  console.log(indented)
-  console.log()
+    console.log(indented)
+    console.log()
+  }
 }
 
 main().catch((err: unknown) => {
