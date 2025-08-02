@@ -73,7 +73,7 @@ const prettierConfig = tseslint.config(eslintConfigPrettier, prettierRecommended
 
 export default tseslint.config(
   {
-    ignores: ['dist', 'node_modules', 'coverage', '*.config.{js,cjs,mjs,ts}'],
+    ignores: ['coverage', 'dist', 'docs', 'node_modules', '*.config.{js,cjs,mjs,ts}'],
   },
   {
     languageOptions: {

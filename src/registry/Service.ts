@@ -48,7 +48,7 @@ export interface ServiceOptions {
 
   /**
    * The TTL (time to live) in seconds for the all records.
-   * @note The same TTL is set to all records (PTR, SRV, TXT, A, AAAA) for simplicity and compatibility.
+   * @remarks The same TTL is set to all records (PTR, SRV, TXT, A, AAAA) for simplicity and compatibility.
    * @default 28800
    */
   ttl?: number
@@ -144,9 +144,6 @@ export class Service extends EventEmitter<ServiceEventMap> implements Required<S
    * Starts the registered service, initiating its publication on the network.
    *
    * If the service has already been started, this method does nothing.
-   *
-   * @param options Optional settings for starting the service.
-   * @param options.probe Whether to perform a name conflict probe before publishing.
    */
   async start(): Promise<void> {
     if (!this.started) {

@@ -87,7 +87,7 @@ export class DiscoveredService {
         const host = answer.data.target
         const port = answer.data.port
 
-        /** @note Only the TTL of the PTR record is used for simplicity and compatibility */
+        /** @remarks Only the TTL of the PTR record is used for simplicity and compatibility */
         service = new DiscoveredService(name, fqdn, host, port, referer, ptr.ttl, Date.now())
       }
     }
