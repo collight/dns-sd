@@ -1,0 +1,22 @@
+{
+  "extends": "./tsconfig.base.json",
+
+  "compilerOptions": {
+    "baseUrl": ".",
+
+    "rootDir": "src",
+
+    "lib": ["ESNext"],
+    "types": ["vite/client"],
+
+    "noErrorTruncation": true,
+
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "dist/types",
+    "declarationMap": true,
+    "stripInternal": true
+  },
+
+  "include": ["src/**/*"]
+}

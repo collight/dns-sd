@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    /* Basic Type Checking */
+    "strict": true, // Enable all strict type checking options
+    "skipLibCheck": true, // Skip type checking of declaration files
+    "noUncheckedIndexedAccess": true,
+
+    /* Module Resolution */
+    "module": "ESNext", // Use modern ES modules
+    "moduleResolution": "bundler", // Module resolution strategy for bundlers
+    "allowSyntheticDefaultImports": true, // Allow default imports from modules with no default export
+    "resolveJsonModule": true, // Allow importing JSON files as modules
+
+    /* JavaScript Interop */
+    "allowJs": false, // Disallow JavaScript files in compilation
+
+    /* Compilation Target */
+    "target": "ES2020", // Compile to ECMAScript 2023 standard
+
+    /* Module Isolation */
+    "isolatedModules": true // Ensure each file can be safely transpiled independently
+  }
+}
