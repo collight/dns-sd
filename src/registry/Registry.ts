@@ -214,7 +214,7 @@ export class Registry {
 
       let delay = 1000
       this.server.mdns.respond(records, error => {
-        if (error !== null) {
+        if (error) {
           console.warn('Error during announcement:', error)
         }
 
