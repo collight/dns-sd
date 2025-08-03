@@ -1,5 +1,11 @@
 # dns-sd
 
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/collight/dns-sd/publish-release.yml?style=flat-square)
+![Bundlephobia](https://img.shields.io/bundlephobia/min/@collight/dns-sd?style=flat-square)
+![GitHub Release Date](https://img.shields.io/github/release-date/collight/dns-sd?style=flat-square)
+![GitHub License](https://img.shields.io/github/license/collight/dns-sd?style=flat-square)
+[![DeepScan grade](https://deepscan.io/api/teams/27688/projects/30090/branches/964215/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=27688&pid=30090&bid=964215)
+
 A DNS Service Discovery implementation in modern TypeScript
 
 This is a rewrite of the [bonjour-service](https://github.com/onlxltd/bonjour-service) library that fixes multiple

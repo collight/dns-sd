@@ -1,9 +1,9 @@
-The MIT License (MIT)
+MIT License
 
-Copyright (https://github.com/collight/dns-sd) (c) 2025 Collight
+Copyright (c) 2025 Collight
 
-Portions Copyright (https://github.com/onlxltd/bonjour-service) (c) 2021 ON LX Limited  
-Portions Copyright (Bonjour - https://github.com/watson/bonjour) (c) 2015-2016 Thomas Watson Steen
+Portions Copyright (bonjour-service - https://github.com/onlxltd/bonjour-service) (c) 2021 ON LX Limited  
+Portions Copyright (bonjour - https://github.com/watson/bonjour) (c) 2015-2016 Thomas Watson Steen
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
