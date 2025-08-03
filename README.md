@@ -1,9 +1,9 @@
 # dns-sd
 
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/collight/dns-sd/publish-release.yml?style=flat-square)
-![Bundlephobia](https://img.shields.io/bundlephobia/min/@collight/dns-sd?style=flat-square)
-![GitHub Release Date](https://img.shields.io/github/release-date/collight/dns-sd?style=flat-square)
-![GitHub License](https://img.shields.io/github/license/collight/dns-sd?style=flat-square)
+[![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/collight/dns-sd/publish-release.yml?style=flat-square)](https://github.com/collight/dns-sd/actions/workflows/publish-release.yml)
+[![Bundlephobia](https://img.shields.io/bundlephobia/min/@collight/dns-sd?style=flat-square)](https://bundlephobia.com/package/@collight/dns-sd)
+[![GitHub Release Date](https://img.shields.io/github/release-date/collight/dns-sd?style=flat-square)](https://github.com/collight/dns-sd/releases)
+[![License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/collight/dns-sd?tab=License-1-ov-file#readme)
 [![DeepScan grade](https://deepscan.io/api/teams/27688/projects/30090/branches/964215/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=27688&pid=30090&bid=964215)
 
 A DNS Service Discovery implementation in modern TypeScript
@@ -58,8 +58,11 @@ https://collight.github.io/dns-sd/
 
 ```bash
 pnpm i
+
 pnpm format && pnpm lint
+
 pnpm build && pnpm test
+
 pnpm doc
 ```
 
