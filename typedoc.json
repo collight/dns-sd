@@ -3,8 +3,10 @@
   "out": "docs",
   "theme": "default",
   "readme": "README.md",
+  "gitRevision": "main",
   "excludePrivate": true,
   "excludeProtected": true,
   "excludeExternals": true,
-  "excludeNotDocumented": true
+  "excludeNotDocumented": true,
+  "plugin": ["typedoc-plugin-coverage"]
 }

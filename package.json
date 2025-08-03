@@ -19,7 +19,7 @@
     "clean:out": "rimraf dist coverage",
     "clean:npm": "rimraf node_modules",
     "clean": "pnpm clean:out && pnpm clean:npm",
-    "doc": "typedoc --plugin typedoc-plugin-coverage",
+    "doc": "typedoc",
     "doc:serve": "serve docs"
   },
   "dependencies": {

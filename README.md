@@ -5,6 +5,7 @@
 [![GitHub Release Date](https://img.shields.io/github/release-date/collight/dns-sd?style=flat-square)](https://github.com/collight/dns-sd/releases)
 [![License](https://img.shields.io/badge/license-MIT-blue)](https://github.com/collight/dns-sd?tab=License-1-ov-file#readme)
 [![DeepScan grade](https://deepscan.io/api/teams/27688/projects/30090/branches/964215/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=27688&pid=30090&bid=964215)
+[![Doc](https://collight.github.io/dns-sd/coverage.svg)](https://collight.github.io/dns-sd/)
 
 A DNS Service Discovery implementation in modern TypeScript
 
