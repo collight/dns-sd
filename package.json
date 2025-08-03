@@ -4,7 +4,7 @@
   "description": "A DNS Service Discovery implementation in modern TypeScript",
   "type": "module",
   "main": "./dist/cjs/index.cjs",
-  "module": "./dist/esm/index.mjs",
+  "module": "./dist/esm/index.js",
   "types": "./dist/types/index.d.ts",
   "scripts": {
     "demo": "npx tsx demo/main.ts",
