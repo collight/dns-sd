@@ -19,7 +19,7 @@
     "clean:out": "rimraf dist coverage",
     "clean:npm": "rimraf node_modules",
     "clean": "pnpm clean:out && pnpm clean:npm",
-    "doc": "typedoc",
+    "doc": "typedoc --plugin typedoc-plugin-coverage",
     "doc:serve": "serve docs"
   },
   "dependencies": {
@@ -45,6 +45,7 @@
     "serve": "^14.2.4",
     "tsx": "^4.20.3",
     "typedoc": "^0.28.9",
+    "typedoc-plugin-coverage": "^4.0.1",
     "typescript": "~5.8.3 ",
     "typescript-eslint": "^8.38.0",
     "vite": "^7.0.6",

@@ -69,6 +69,9 @@ importers:
       typedoc:
         specifier: ^0.28.9
         version: 0.28.9(typescript@5.8.3)
+      typedoc-plugin-coverage:
+        specifier: ^4.0.1
+        version: 4.0.1(typedoc@0.28.9(typescript@5.8.3))
       typescript:
         specifier: '~5.8.3 '
         version: 5.8.3
@@ -1507,6 +1510,12 @@ packages:
   type-fest@2.19.0:
     resolution: {integrity: sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==, tarball: https://registry.npmjs.org/type-fest/-/type-fest-2.19.0.tgz}
     engines: {node: '>=12.20'}
+
+  typedoc-plugin-coverage@4.0.1:
+    resolution: {integrity: sha512-P1QBR5GJSfW3fDrpz4Vkd8z8lzWaBYjaHebRLk0u2Uga0oSFlPaqrCyiHzItBXxZX28aMlNlZwrUnsLgUgqA7g==, tarball: https://registry.npmjs.org/typedoc-plugin-coverage/-/typedoc-plugin-coverage-4.0.1.tgz}
+    engines: {node: '>= 18'}
+    peerDependencies:
+      typedoc: 0.28.x
 
   typedoc@0.28.9:
     resolution: {integrity: sha512-aw45vwtwOl3QkUAmWCnLV9QW1xY+FSX2zzlit4MAfE99wX+Jij4ycnpbAWgBXsRrxmfs9LaYktg/eX5Bpthd3g==, tarball: https://registry.npmjs.org/typedoc/-/typedoc-0.28.9.tgz}
@@ -3015,6 +3024,10 @@ snapshots:
       prelude-ls: 1.2.1
 
   type-fest@2.19.0: {}
+
+  typedoc-plugin-coverage@4.0.1(typedoc@0.28.9(typescript@5.8.3)):
+    dependencies:
+      typedoc: 0.28.9(typescript@5.8.3)
 
   typedoc@0.28.9(typescript@5.8.3):
     dependencies:
