@@ -15,7 +15,7 @@
     "allowJs": false, // Disallow JavaScript files in compilation
 
     /* Compilation Target */
-    "target": "ES2020", // Compile to ECMAScript 2023 standard
+    "target": "ES2020", // Compile to ECMAScript 2020 standard
 
     /* Module Isolation */
     "isolatedModules": true // Ensure each file can be safely transpiled independently

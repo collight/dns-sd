@@ -8,7 +8,7 @@ export default defineConfig(env => {
     test: {
       globals: true,
       environment: 'node',
-      include: ['test/**/*.{test,spec}.{ts,tsx}'],
+      include: ['tests/**/*.{test,spec}.{ts,tsx}'],
       coverage: {
         provider: 'v8', // or 'istanbul'
         reporter: ['text', 'json', 'html'], // Output formats

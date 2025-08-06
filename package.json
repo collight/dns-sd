@@ -14,7 +14,7 @@
     "build:watch": "vite build --watch",
     "test": "vitest run --coverage",
     "test:watch": "vitest --watch",
-    "format": "prettier . --write --config ./prettier.config.mjs --plugin='@ianvs/prettier-plugin-sort-imports'",
+    "format": "prettier . --write --config ./prettier.config.js --plugin='@ianvs/prettier-plugin-sort-imports'",
     "lint": "tsc --noEmit --extendedDiagnostics && eslint .",
     "clean:out": "rimraf dist coverage",
     "clean:npm": "rimraf node_modules",
