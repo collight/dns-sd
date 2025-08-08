@@ -26,7 +26,7 @@ export function nameEquals(a: string, b: string): boolean {
  * // [Buffer.from("foo=bar"), Buffer.from("baz=qux")]
  * ```
  */
-export function encodeTXT(data: Record<string, string | number | boolean | Buffer> = {}) {
+export function encodeTXT(data: Record<string, string | number | boolean | Buffer> = {}): Buffer[] {
   const buffers: Buffer[] = []
   for (const [key, value] of Object.entries(data)) {
     buffers.push(Buffer.from(`${key}=${value}`))

@@ -4,7 +4,7 @@ import { afterEach, beforeEach, describe, expect, it } from 'vitest'
 
 import { DNSSD } from '../src'
 
-function getAddresses() {
+function getAddresses(): string[] {
   const addresses: string[] = []
   const itrs = Object.values(os.networkInterfaces())
   for (const addrs of itrs) {
@@ -17,7 +17,7 @@ function getAddresses() {
   return addresses
 }
 
-function filterDuplicates(input: string[]) {
+function filterDuplicates(input: string[]): string[] {
   return input.reduce<string[]>((prev, curr) => {
     if (!prev.includes(curr)) prev.push(curr)
     return prev

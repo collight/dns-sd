@@ -16,7 +16,7 @@ interface CLIOptions {
 }
 
 // Parse TXT key=value pairs from CLI
-function collectKeyValue(value: string, previous: Record<string, string> = {}) {
+function collectKeyValue(value: string, previous: Record<string, string> = {}): Record<string, string> {
   const [key, val] = value.split('=')
   if (key == undefined || val === undefined) {
     throw new Error(chalk.red(`❌ Invalid TXT format: "${value}". Use key=value`))
@@ -26,7 +26,7 @@ function collectKeyValue(value: string, previous: Record<string, string> = {}) {
 }
 
 // MARK: main
-async function main() {
+async function main(): Promise<void> {
   program
     .name(chalk.blue('dnssd-browser'))
     .description('🔍 Browse and watch DNS-SD services')
@@ -44,7 +44,7 @@ async function main() {
 
   process.on('SIGINT', () => {
     console.log(chalk.yellow('\n⚙️ [Exit] Cleaning up resources...'))
-    void (async () => {
+    void (async (): Promise<never> => {
       await dnssd.unpublishAll()
       await dnssd.destroy()
       console.log(chalk.green('✅ Clean exit. Goodbye!'))

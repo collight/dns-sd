@@ -17,7 +17,7 @@ type CLIOptions = {
   txt: Record<string, string>
 }
 
-function collectKeyValue(value: string, previous: Record<string, string> = {}) {
+function collectKeyValue(value: string, previous: Record<string, string> = {}): Record<string, string> {
   const [key, val] = value.split('=')
   if (key === undefined || val === undefined) {
     throw new Error(chalk.red(`❌ Invalid data format: "${value}". Use key=value`))
@@ -27,7 +27,7 @@ function collectKeyValue(value: string, previous: Record<string, string> = {}) {
 }
 
 // MARK: main
-async function main() {
+async function main(): Promise<void> {
   program
     .name(chalk.blueBright('browser'))
     .description('📡 A DNSSD service publisher')
@@ -46,7 +46,7 @@ async function main() {
   const dnssd = new DNSSD({ ip: '224.0.0.251', port: 5353 })
 
   process.on('SIGINT', () => {
-    void (async () => {
+    void (async (): Promise<never> => {
       console.log(chalk.yellow('\n⚙️ [Exit] Cleaning up resources...'))
       await dnssd.unpublishAll()
       await dnssd.destroy()

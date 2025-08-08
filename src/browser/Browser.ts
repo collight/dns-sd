@@ -93,10 +93,10 @@ export class Browser extends EventEmitter<BrowserEventMap> {
    * Starts the browser and begins listening for mDNS service announcements.
    * - Has no effect if the browser is already started.
    */
-  start() {
+  start(): void {
     if (this.onresponse) return
 
-    this.onresponse = (packet: ResponsePacket, rinfo: RemoteInfo) => {
+    this.onresponse = (packet: ResponsePacket, rinfo: RemoteInfo): void => {
       debug('mdns on response packet:', packet)
 
       // Handle goodbye records (TTL = 0) to remove offline services
@@ -140,7 +140,7 @@ export class Browser extends EventEmitter<BrowserEventMap> {
    * Stops the browser from listening to mDNS service announcements.
    * - Has no effect if the browser is already stopped
    */
-  stop() {
+  stop(): void {
     if (!this.onresponse) return
 
     this.mdns.removeListener('response', this.onresponse)
@@ -158,7 +158,7 @@ export class Browser extends EventEmitter<BrowserEventMap> {
    * - Causes mDNS responders to reply with their current service information
    * - Useful for manual refresh when you suspect stale service data
    */
-  update() {
+  update(): void {
     // Actively query for service PTR records
     debug('mdns query with:', this.queryNames)
     for (const queryName of this.queryNames) {
@@ -208,7 +208,7 @@ export class Browser extends EventEmitter<BrowserEventMap> {
   /**
    * TODO: {@link https://datatracker.ietf.org/doc/html/rfc6762#section-5.2 | Continuous Multicast DNS Querying}
    */
-  private setupTTLTimer(service: DiscoveredService) {
+  private setupTTLTimer(service: DiscoveredService): void {
     if (service.ttl !== undefined) {
       service.ttlTimer = setTimeout(() => {
         if (service.expired) {
@@ -218,7 +218,7 @@ export class Browser extends EventEmitter<BrowserEventMap> {
     }
   }
 
-  private addService(service: DiscoveredService) {
+  private addService(service: DiscoveredService): void {
     if (!this.match(service)) {
       return
     }
@@ -230,7 +230,7 @@ export class Browser extends EventEmitter<BrowserEventMap> {
     this.emit('up', service)
   }
 
-  private updateService(service: DiscoveredService) {
+  private updateService(service: DiscoveredService): void {
     // If the new updated service no longer matches the filter, remove the service
     if (!this.match(service)) {
       this.removeService(service.fqdn)
@@ -252,7 +252,7 @@ export class Browser extends EventEmitter<BrowserEventMap> {
     }
   }
 
-  private removeService(fqdn: string) {
+  private removeService(fqdn: string): void {
     for (let i = 0; i < this.services.length; ++i) {
       const s = this.services[i]
       if (s && nameEquals(s.fqdn, fqdn)) {

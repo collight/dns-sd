@@ -3,8 +3,15 @@ import { describe, expect, it } from 'vitest'
 
 import { Service } from '../src' // Adjust import path as needed
 
-function getAddressesRecords(host: string, ttl: number) {
-  const records = []
+type AddressesRecord = {
+  data: string
+  name: string
+  ttl: number
+  type: string
+}
+
+function getAddressesRecords(host: string, ttl: number): AddressesRecord[] {
+  const records: AddressesRecord[] = []
   const itrs = Object.values(os.networkInterfaces())
   for (const addrs of itrs) {
     for (const { internal, address, family, mac } of addrs ?? []) {

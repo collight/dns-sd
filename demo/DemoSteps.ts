@@ -1,6 +1,6 @@
 import chalk from 'chalk'
 
-export async function delay(ms: number) {
+export async function delay(ms: number): Promise<void> {
   return new Promise(res => setTimeout(res, ms))
 }
 
@@ -20,7 +20,7 @@ export class DemoSteps {
     return this
   }
 
-  async run() {
+  async run(): Promise<void> {
     const total = this.steps.length
     for (let i = 0; i < total; i++) {
       const { durationMs, label, fn } = this.steps[i]!
@@ -38,7 +38,7 @@ export class DemoSteps {
     }
   }
 
-  async runForever(label: string, fn?: StepFn) {
+  async runForever(label: string, fn?: StepFn): Promise<void> {
     await this.run()
 
     const footer = chalk.greenBright.bold(`\n${label}`)

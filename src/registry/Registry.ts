@@ -48,7 +48,7 @@ export class Registry {
    *
    * Sends goodbye messages and clears internal service state.
    */
-  async unpublishAll() {
+  async unpublishAll(): Promise<void> {
     await this.goodbye(this.startedServices).finally(() => {
       this.startedServices = []
     })
@@ -59,7 +59,7 @@ export class Registry {
    *
    * Used when permanently shutting down the registry and disable future operations.
    */
-  destroy() {
+  destroy(): void {
     for (const service of this.startedServices) {
       service.destroyed = true
     }
@@ -125,7 +125,7 @@ export class Registry {
    * @internal
    * @param service - The service being stopped.
    */
-  async onServiceStop(service: Service) {
+  async onServiceStop(service: Service): Promise<void> {
     await this.goodbye([service]).finally(() => {
       const index = this.startedServices.indexOf(service)
       if (index !== -1) {
@@ -149,7 +149,7 @@ export class Registry {
     let timer: NodeJS.Timeout
 
     return new Promise(resolve => {
-      const send = () => {
+      const send = (): void => {
         // abort if the service have or is being stopped in the meantime
         if (!service.started || service.destroyed) {
           return
@@ -165,13 +165,13 @@ export class Registry {
         })
       }
 
-      const done = (exists = false) => {
+      const done = (exists = false): void => {
         this.server.mdns.off('response', onresponse)
         clearTimeout(timer)
         resolve(exists)
       }
 
-      const onresponse = (packet: ResponsePacket) => {
+      const onresponse = (packet: ResponsePacket): void => {
         /**
          * Apparently conflicting Multicast DNS responses received *before* the first probe packet is sent
          * MUST be silently ignored.
@@ -204,13 +204,13 @@ export class Registry {
    *
    * @see {@link https://datatracker.ietf.org/doc/html/rfc6762#section-8.3 | Announcing}
    */
-  private announce(service: Service) {
+  private announce(service: Service): void {
     const records = service.getRecords()
 
     this.server.register(records)
 
     let delay = 1000
-    const broadcast = () => {
+    const broadcast = (): void => {
       if (!service.started || service.destroyed) return
 
       debug('mdns broadcast:', records)

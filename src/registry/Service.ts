@@ -155,7 +155,7 @@ export class Service extends EventEmitter<ServiceEventMap> implements Required<S
   /**
    * Stops the registered service and removes it from the network.
    */
-  async stop() {
+  async stop(): Promise<void> {
     if (this.started) {
       this.started = false
       await this.registry?.onServiceStop(this)

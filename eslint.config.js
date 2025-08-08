@@ -47,6 +47,8 @@ const typeCheckedConfig = tseslint.config(
       '@typescript-eslint/no-non-null-assertion': 'off',
       /** https://typescript-eslint.io/rules/no-unused-expressions */
       '@typescript-eslint/no-unused-expressions': 'warn',
+      /** https://typescript-eslint.io/rules/explicit-function-return-type */
+      '@typescript-eslint/explicit-function-return-type': 'warn',
       /** https://typescript-eslint.io/rules/no-unused-vars/ */
       '@typescript-eslint/no-unused-vars': [
         'warn',

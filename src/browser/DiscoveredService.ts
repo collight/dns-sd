@@ -222,7 +222,7 @@ export class DiscoveredService {
     this.protocol = serviceType.protocol
   }
 
-  get expired() {
+  get expired(): boolean {
     return this.ttl !== undefined && Date.now() > this.lastSeen + this.ttl * 1000
   }
 }

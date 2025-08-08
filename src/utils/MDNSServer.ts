@@ -55,7 +55,7 @@ export class MDNSServer extends EventEmitter<EventMap> {
    *
    * @param records - An array of mDNS records to register.
    */
-  register(records: MDNSRecord[]) {
+  register(records: MDNSRecord[]): void {
     function isDuplicate(a: MDNSRecord, b: MDNSRecord): boolean {
       return a.type === b.type && a.name === b.name && deepEqual(a.data, b.data)
     }
@@ -77,7 +77,7 @@ export class MDNSServer extends EventEmitter<EventMap> {
    *
    * @param records - Records to remove from the server registry.
    */
-  unregister(records: MDNSRecord[]) {
+  unregister(records: MDNSRecord[]): void {
     for (const record of records) {
       const type = record.type
       const records = this.typeToRecords.get(type) ?? []
